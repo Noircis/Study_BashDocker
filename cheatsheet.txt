@@ -1,0 +1,59 @@
+BASH Cheat Sheet
+
+1 : Intéragir avec les arguments du script :
+	- $1, ... $n : argument n
+	- $# : nombre d'argmts
+	- $* : tous les argmts en une var
+	- $@ : tous les argmts en un tab
+	- $0 : nom du script
+	
+2 : Opérateurs :
+	-opérateurs texte [] :
+		- == : égal
+		- != : différent de
+		-  ! : négation général
+	
+	-opérateur de fileSystème :
+		- -z : variable vide
+		- -f : fichier existe
+		- -d : répertoire existe
+		
+	-opérateur de chiffres (()) :
+		- <= : inf ou égal
+		- >= : supp ou égal
+		- etc.
+		
+3 : Conditions
+	- if [ "$1" == "exemple" ]; then
+		#code
+	  elif [ "$1" == "exemple2" ]; then
+	  	#code
+	  else
+	  	#code
+	  fi
+	  
+	- attention : Les espaces encadrant les "[ ]" sont importants
+	
+4 : Les variables d'environnement
+	- Qques exemples :
+		- $HOME
+		- $USER
+		- $LANG
+		- $SHELL
+	- tapper la commande : env dans la console pour avoir la liste exostive
+	
+5 : Opérations sur les conteneurs
+	- Lancer le conteneur :
+		- docker run -tid --name monnom alpine:latest
+	- Intégrer USER
+		- docker run -tid --name $USER alpine:latest
+	- Lister notre / nos conteneur(s)
+		- docker ps -a | grep $USER
+	- Supprimer ce conteneur
+		- docker rm -f $USER
+		
+6 : Définir une valeur par défaut
+	- Objectif : nombre de conteneur à déployer
+		- tester si $2 est vide et conditionner le cas échéant
+	
+	
