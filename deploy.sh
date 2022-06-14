@@ -2,19 +2,32 @@
 
 #si option == --create
 if [ "$1" == "--create" ]; then
-  echo "notre option est --create"
+  echo "executing --create"
+
+  nb_machine=1
+  [ "$2" != "" ] && nb_machine=$2
+
+  docker run -tid --name $USER-alpine alpine:latest
+
+  echo "created $2 docker(s)"
+
 #si option == --drop
 elif [ "$1" == "--drop" ]; then
-  echo "notre option est --drop"
+  echo "executing --drop"
+
+  docker rm -f $USER-alpine
+
 #si option == --infos
 elif [ "$1" == "--infos" ]; then
-  echo "notre option est --infos"
+  echo "executing --infos"
+
 #si option == --start
 elif [ "$1" == "--start" ]; then
-  echo "notre option est --start"
+  echo "executing --start"
+
 #si option == --ansible
 elif [ "$1" == "--ansible" ]; then
-  echo "notre option est --ansible"
+  echo "executing --ansible"
 
 # si aucune option, l'aide s'affiche
 else
