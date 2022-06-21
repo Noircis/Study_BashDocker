@@ -45,7 +45,8 @@ elif [ "$1" == "--infos" ]; then
 
 #si option == --start
 elif [ "$1" == "--start" ]; then
-  echo "executing --start"
+  echo "starting ..."
+  docker start $(docker ps -a | grep $USER-alpine | awk '{print $1}')
 
 #si option == --ansible
 elif [ "$1" == "--ansible" ]; then
