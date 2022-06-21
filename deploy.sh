@@ -2,20 +2,21 @@
 
 #si option == --create
 if [ "$1" == "--create" ]; then
-  echo "executing --create"
 
+  # def du nb de conteneurs
   nb_machine=1
   [ "$2" != "" ] && nb_machine=$2
+  #creation des conteneurs
+  for i in $(seq 1 $nb_machine); do
+    docker run -tid --name $USER-alpine-$i alpine:latest
+    echo "created $USER-alpine-$i"
+  done
 
-  docker run -tid --name $USER-alpine alpine:latest
-
-  echo "created $2 docker(s)"
 
 #si option == --drop
 elif [ "$1" == "--drop" ]; then
-  echo "executing --drop"
-
-  docker rm -f $USER-alpine
+  echo "deleting..."
+  docker rm -f $(docker ps -a | grep $USER-alpine | awk '{print $1}')
 
 #si option == --infos
 elif [ "$1" == "--infos" ]; then
