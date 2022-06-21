@@ -16,10 +16,20 @@ if [ "$1" == "--create" ]; then
   # def nb de conteneurs
   nb_machine=1
   [ "$2" != "" ] && nb_machine=$2
+
+  # set min/max
+  min=1
+  max=0
+
   # récup de l'id max
-  idmax=$(docker ps -a --format '{{ .Names}}' | awk -F "." -v user=$USER '$0 ~ user"-alpine" {print $3}' | sort -r | head -1)
+  idmax=`docker ps -a --format '{{ .Names}}' | awk -F "-" -v user=$USER '$0 ~ user"-alpine" {print $3}' | sort -r | head -1`
+
+  #redef de min/max
+  min=$(($idmax + 1))
+  max=$(($idmax + $nb_machine))
+
   #creation des conteneurs
-  for i in $(seq 1 $nb_machine); do
+  for i in $(seq $min $max); do
     docker run -tid --name $USER-alpine-$i alpine:latest
     echo "created $USER-alpine-$i"
   done
