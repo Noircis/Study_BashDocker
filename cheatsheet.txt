@@ -1,5 +1,7 @@
 BASH Cheat Sheet
 
+Donner les droits d'exec au sript : chmod u+x ./script.sh
+
 1 : Intéragir avec les arguments du script :
 	- $1, ... $n : argument n
 	- $# : nombre d'argmts
@@ -54,6 +56,25 @@ BASH Cheat Sheet
 		
 6 : Définir une valeur par défaut
 	- Objectif : nombre de conteneur à déployer
-		- tester si $2 est vide et conditionner le cas échéant
+		- tester si $2 est vide et conditionner le cas échéant :
+		- syntaxe courte
+		nb_machine = 1
+		[ "$2" != "" ] && nb_machine=$2
+		
+7 : La boucle FOR
+	- Itération de valeur dans un tableau (in)
+	- Pas de (i=0;i<10;i++)
+	
+	- 2 METHODES POUR LES NOMBRES
+		- commande seq
+			- for i in $(seq 1 10); do
+				#code
+		  	  done
+		- de {x..x}
+			- for i in {1..10}; do
+			  	#code
+			  done
+			
+	
 	
 	

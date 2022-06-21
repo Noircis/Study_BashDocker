@@ -1,17 +1,28 @@
 #!/bin/bash
 
+###############################################################
+#
+# Desc : déploiment de conteneurs docker
+#
+# Auth : Noircis (tutored by xavki)
+#
+# Date : 12 Juin 2022
+#
+###############################################################
+
 #si option == --create
 if [ "$1" == "--create" ]; then
 
-  # def du nb de conteneurs
+  # def nb de conteneurs
   nb_machine=1
   [ "$2" != "" ] && nb_machine=$2
+  # récup de l'id max
+  idmax=$(docker ps -a --format '{{ .Names}}' | awk -F "." -v user=$USER '$0 ~ user"-alpine" {print $3}' | sort -r | head -1)
   #creation des conteneurs
   for i in $(seq 1 $nb_machine); do
     docker run -tid --name $USER-alpine-$i alpine:latest
     echo "created $USER-alpine-$i"
   done
-
 
 #si option == --drop
 elif [ "$1" == "--drop" ]; then
